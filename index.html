@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Majestic Menu</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Inter',sans-serif;
+      background:#050816;
+      color:white;
+      overflow-x:hidden;
+
+      background-image:
+      radial-gradient(circle at top, rgba(98,80,255,0.25), transparent 40%),
+      linear-gradient(rgba(100,100,255,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(100,100,255,0.08) 1px, transparent 1px);
+
+      background-size:
+      cover,
+      24px 24px,
+      24px 24px;
+    }
+
+    .navbar{
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:22px 80px;
+      background:rgba(0,0,0,0.3);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(255,255,255,0.05);
+    }
+
+    .logo{
+      font-size:32px;
+      font-weight:800;
+
+      background:linear-gradient(90deg,#8a7dff,#5d50ff);
+
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:35px;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:#cfcfff;
+      transition:0.3s;
+      font-weight:500;
+    }
+
+    .nav-links a:hover{
+      color:#7c6cff;
+    }
+
+    .hero{
+      text-align:center;
+      padding:120px 20px 80px;
+    }
+
+    .hero h1{
+      font-size:75px;
+      font-weight:800;
+      margin-bottom:20px;
+
+      background:linear-gradient(90deg,#9f94ff,#5a4cff);
+
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero p{
+      max-width:750px;
+      margin:auto;
+      color:#b9b9da;
+      font-size:20px;
+      line-height:1.7;
+    }
+
+    .buttons{
+      margin-top:45px;
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      padding:16px 34px;
+      border-radius:14px;
+      font-size:17px;
+      font-weight:700;
+      text-decoration:none;
+      transition:0.3s;
+    }
+
+    .btn-primary{
+      background:linear-gradient(90deg,#6f61ff,#5145ff);
+      color:white;
+      box-shadow:0 0 20px rgba(98,83,255,0.45);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-4px);
+      box-shadow:0 0 30px rgba(98,83,255,0.8);
+    }
+
+    .btn-secondary{
+      border:1px solid rgba(255,255,255,0.15);
+      color:white;
+      background:rgba(255,255,255,0.03);
+    }
+
+    .btn-secondary:hover{
+      background:rgba(255,255,255,0.08);
+    }
+
+    .section-title{
+      text-align:center;
+      font-size:50px;
+      margin-top:90px;
+      margin-bottom:60px;
+      color:#8175ff;
+    }
+
+    .cards{
+      width:90%;
+      max-width:1400px;
+      margin:auto;
+
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+      gap:30px;
+      padding-bottom:100px;
+    }
+
+    .card{
+      background:linear-gradient(145deg, rgba(24,24,45,0.95), rgba(17,17,30,0.9));
+
+      border:1px solid rgba(255,255,255,0.05);
+
+      border-radius:24px;
+
+      padding:35px;
+
+      transition:0.35s;
+
+      position:relative;
+
+      overflow:hidden;
+    }
+
+    .card::before{
+      content:'';
+
+      position:absolute;
+
+      width:180px;
+      height:180px;
+
+      background:rgba(106,90,255,0.12);
+
+      border-radius:50%;
+
+      top:-70px;
+      right:-70px;
+    }
+
+    .card:hover{
+      transform:translateY(-8px);
+
+      border-color:rgba(124,108,255,0.5);
+
+      box-shadow:0 0 30px rgba(124,108,255,0.2);
+    }
+
+    .card h3{
+      font-size:28px;
+      margin-bottom:18px;
+      position:relative;
+      z-index:2;
+    }
+
+    .card p{
+      color:#b7b7d4;
+      line-height:1.7;
+      position:relative;
+      z-index:2;
+    }
+
+    footer{
+      text-align:center;
+      padding:40px 20px;
+      border-top:1px solid rgba(255,255,255,0.06);
+      color:#9a9ab3;
+      background:rgba(0,0,0,0.2);
+    }
+
+    @media(max-width:900px){
+
+      .navbar{
+        padding:20px;
+        flex-direction:column;
+        gap:15px;
+      }
+
+      .hero h1{
+        font-size:55px;
+      }
+
+      .section-title{
+        font-size:40px;
+      }
+
+    }
+
+    @media(max-width:600px){
+
+      .hero h1{
+        font-size:42px;
+      }
+
+      .hero p{
+        font-size:16px;
+      }
+
+      .nav-links{
+        gap:18px;
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+
+    <div class="logo">
+      Majestic Menu
+    </div>
+
+    <div class="nav-links">
+
+      <a href="#">Home</a>
+      <a href="#">Features</a>
+      <a href="#">Scripts</a>
+
+      <a href="https://discord.gg/DkWkgG74ua" target="_blank">
+        Discord
+      </a>
+
+    </div>
+
+  </nav>
+
+  <section class="hero">
+
+    <h1>
+      Majestic Menu
+    </h1>
+
+    <p>
+      O melhor hub premium com scripts rápidos,
+      seguros e atualizados.
+      Interface moderna com visual neon futurista.
+    </p>
+
+    <div class="buttons">
+
+      <a href="#" class="btn btn-primary">
+        Get Scripts
+      </a>
+
+      <a href="https://discord.gg/DkWkgG74ua"
+      target="_blank"
+      class="btn btn-secondary">
+
+        Join Discord
+
+      </a>
+
+    </div>
+
+  </section>
+
+  <h2 class="section-title">
+    Why Choose Majestic?
+  </h2>
+
+  <section class="cards">
+
+    <div class="card">
+
+      <h3>Fast Updates</h3>
+
+      <p>
+        Sistema atualizado constantemente
+        para garantir estabilidade e desempenho.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <h3>Premium Design</h3>
+
+      <p>
+        Interface moderna inspirada
+        em painéis futuristas neon.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <h3>Automation</h3>
+
+      <p>
+        Ferramentas automáticas
+        rápidas e otimizadas.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <h3>Community</h3>
+
+      <p>
+        Entre no Discord oficial
+        do Majestic Menu.
+      </p>
+
+    </div>
+
+  </section>
+
+  <footer>
+
+    © 2026 Majestic Menu
+
+  </footer>
+
+</body>
+</html>
