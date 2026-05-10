@@ -2,49 +2,49 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-
 <title>Dashboard</title>
 
 <style>
-
 body{
-
 background:#050816;
 color:white;
 font-family:Arial;
-
 }
 
 .card{
-
 width:600px;
-
-margin:100px auto;
-
+margin:50px auto;
 background:#11152a;
-
 padding:40px;
-
 border-radius:20px;
-
 }
 
 button{
-
 padding:14px 20px;
-
 background:#6d5cff;
-
 border:none;
-
 border-radius:10px;
-
 color:white;
-
 cursor:pointer;
-
+margin-top:10px;
 }
 
+textarea, input{
+width:100%;
+margin-top:10px;
+padding:10px;
+border-radius:10px;
+border:none;
+background:#1a1f3d;
+color:white;
+}
+
+.tool{
+margin-top:25px;
+padding:20px;
+background:#0c1022;
+border-radius:15px;
+}
 </style>
 </head>
 
@@ -54,19 +54,82 @@ cursor:pointer;
 
 <h1 id="welcome"></h1>
 
-<p>
-Bem-vindo ao painel Majestic Menu.
-</p>
+<p>Bem-vindo ao painel Majestic Menu.</p>
 
-<br>
+<button onclick="logout()">Logout</button>
 
-<button onclick="logout()">
-Logout
-</button>
+<!-- 🔐 LUA OBFUSCATOR -->
+<div class="tool">
+<h3>Lua Obfuscator</h3>
+<textarea id="luaInput" placeholder="cole seu script Lua aqui"></textarea>
+<button onclick="obfuscateLua()">Criptografar</button>
+<textarea id="luaOutput" placeholder="resultado"></textarea>
+</div>
+
+<!-- 🔤 ASCII -->
+<div class="tool">
+<h3>ASCII Generator</h3>
+<input id="asciiInput" placeholder="texto aqui">
+<button onclick="asciiGen()">Gerar</button>
+<textarea id="asciiOutput"></textarea>
+</div>
 
 </div>
 
-<script src="script.js"></script>
+<script src="auth.js"></script>
+
+<script>
+// ===== PROTEÇÃO =====
+let user = JSON.parse(localStorage.getItem("loggedUser"));
+
+if(!user){
+window.location.href = "login.html";
+}
+
+document.getElementById("welcome").innerText =
+"Bem-vindo, " + user.username;
+
+// ===== LOGOUT =====
+function logout(){
+localStorage.removeItem("loggedUser");
+window.location.href = "login.html";
+}
+
+// ===== LUA OBFUSCATOR (simples) =====
+function obfuscateLua(){
+let code = document.getElementById("luaInput").value;
+
+if(!code) return;
+
+let encoded = btoa(unescape(encodeURIComponent(code)));
+
+let junk = "--[[MAJESTIC OBFUSCATED]]--\n";
+
+document.getElementById("luaOutput").value =
+junk + "loadstring(decode('" + encoded + "'))()";
+}
+
+// ===== ASCII SIMPLE =====
+function asciiGen(){
+let text = document.getElementById("asciiInput").value;
+
+let map = {
+a:"𝖆",b:"𝖇",c:"𝖈",d:"𝖉",e:"𝖊",
+f:"𝖋",g:"𝖌",h:"𝖍",i:"𝖎",j:"𝖏",
+k:"𝖐",l:"𝖑",m:"𝖒",n:"𝖓",o:"𝖔",
+p:"𝖕",q:"𝖖",r:"𝖗",s:"𝖘",t:"𝖙",
+u:"𝖚",v:"𝖛",w:"𝖜",x:"𝖝",y:"𝖞",z:"𝖟"
+};
+
+let out = "";
+
+for(let c of text.toLowerCase()){
+out += map[c] || c;
+}
+
+document.getElementById("asciiOutput").value = out;
+}
+</script>
 
 </body>
 </html>
