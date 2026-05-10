@@ -182,3 +182,24 @@ Registrar
 
 </body>
 </html>
+<script src="auth.js"></script>
+<script>
+function login(){
+  let username = document.getElementById("loginUser").value;
+  let password = document.getElementById("loginPass").value;
+
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+
+  let user = users.find(u => u.username === username && u.password === password);
+
+  if(!user){
+    alert("Login inválido");
+    return;
+  }
+
+  localStorage.setItem("loggedUser", JSON.stringify(user));
+
+  alert("Bem-vindo " + username);
+  window.location.href = "dashboard.html";
+}
+</script>
