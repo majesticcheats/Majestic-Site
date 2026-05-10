@@ -17,6 +17,23 @@ pass:"fwakaazz"
 
 ]
 
+function saveUsers(users){
+
+localStorage.setItem(
+"users",
+JSON.stringify(users)
+)
+
+}
+
+function getUsers(){
+
+return JSON.parse(
+localStorage.getItem("users")
+) || []
+
+}
+
 function register(){
 
 const username =
@@ -32,20 +49,29 @@ return
 
 }
 
-const users =
-JSON.parse(localStorage.getItem("users")) || []
+const users = getUsers()
+
+const exists = users.find(
+u => u.username === username
+)
+
+if(exists){
+
+alert("Usuário já existe")
+return
+
+}
 
 users.push({
 
 username,
-password
+password,
+key:"",
+created:Date.now()
 
 })
 
-localStorage.setItem(
-"users",
-JSON.stringify(users)
-)
+saveUsers(users)
 
 alert("Conta criada")
 
@@ -61,8 +87,7 @@ document.getElementById("loginUser").value
 const password =
 document.getElementById("loginPass").value
 
-const admin =
-admins.find(a=>
+const admin = admins.find(a=>
 
 a.user === username &&
 a.pass === password
@@ -76,6 +101,11 @@ localStorage.setItem(
 username
 )
 
+localStorage.setItem(
+"isAdmin",
+"true"
+)
+
 window.location.href =
 "admin.html"
 
@@ -83,8 +113,7 @@ return
 
 }
 
-const users =
-JSON.parse(localStorage.getItem("users")) || []
+const users = getUsers()
 
 const user =
 users.find(u=>
@@ -99,6 +128,11 @@ if(user){
 localStorage.setItem(
 "loggedUser",
 username
+)
+
+localStorage.setItem(
+"isAdmin",
+"false"
 )
 
 window.location.href =
@@ -118,29 +152,116 @@ localStorage.removeItem(
 "loggedUser"
 )
 
+localStorage.removeItem(
+"isAdmin"
+)
+
 window.location.href =
 "login.html"
 
 }
 
-const welcome =
-document.getElementById("welcome")
+function setUserKey(){
 
-if(welcome){
+const username =
+document.getElementById("setKeyUser").value
 
-welcome.innerText =
-"Welcome, " +
-localStorage.getItem("loggedUser")
+const key =
+document.getElementById("setKeyValue").value
+
+const users = getUsers()
+
+const user = users.find(
+u => u.username === username
+)
+
+if(!user){
+
+alert("Usuário não encontrado")
+return
 
 }
 
-const adminName =
-document.getElementById("adminName")
+user.key = key
 
-if(adminName){
+saveUsers(users)
 
-adminName.innerText =
-"Admin: " +
-localStorage.getItem("loggedUser")
+alert("Key salva")
+
+}
+
+function generateKey(){
+
+const chars =
+"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+
+let result = "MJ-"
+
+for(let i=0;i<20;i++){
+
+result +=
+chars.charAt(
+Math.floor(Math.random()*chars.length)
+)
+
+}
+
+const field =
+document.getElementById("setKeyValue")
+
+if(field){
+field.value = result
+}
+
+}
+
+function encryptLua(){
+
+const input =
+document.getElementById("luaInput")
+
+const output =
+document.getElementById("luaOutput")
+
+const text = input.value
+
+const encoded = btoa(unescape(encodeURIComponent(text)))
+
+output.value =
+'-- encoded\\n'+encoded
+
+}
+
+function generateAscii(){
+
+const text =
+document.getElementById("asciiInput").value
+
+const output =
+document.getElementById("asciiOutput")
+
+output.value =
+"█▓▒░ " + text + " ░▒▓█"
+
+}
+
+function imageToAscii(event){
+
+const file = event.target.files[0]
+
+if(!file) return
+
+const reader = new FileReader()
+
+reader.onload = function(){
+
+document.getElementById(
+"asciiOutput"
+).value =
+"ASCII gerado da imagem."
+
+}
+
+reader.readAsDataURL(file)
 
 }
