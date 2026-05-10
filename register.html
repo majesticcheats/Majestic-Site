@@ -1,1 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Majestic Register</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:'Inter',sans-serif;
+
+background:#050816;
+
+color:white;
+
+height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+background-image:
+radial-gradient(circle at top, rgba(98,80,255,0.25), transparent 40%),
+linear-gradient(rgba(100,100,255,0.08) 1px, transparent 1px),
+linear-gradient(90deg, rgba(100,100,255,0.08) 1px, transparent 1px);
+
+background-size:
+cover,
+24px 24px,
+24px 24px;
+
+}
+
+.box{
+
+width:420px;
+
+background:rgba(17,21,42,0.95);
+
+border:1px solid rgba(255,255,255,0.06);
+
+padding:40px;
+
+border-radius:25px;
+
+backdrop-filter:blur(10px);
+
+box-shadow:0 0 40px rgba(98,80,255,0.25);
+
+}
+
+h1{
+
+text-align:center;
+
+font-size:40px;
+
+margin-bottom:30px;
+
+background:linear-gradient(90deg,#9f94ff,#5a4cff);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+}
+
+input{
+
+width:100%;
+
+padding:16px;
+
+margin-top:15px;
+
+border:none;
+
+border-radius:12px;
+
+background:#1a1f3d;
+
+color:white;
+
+font-size:15px;
+
+outline:none;
+
+}
+
+button{
+
+width:100%;
+
+padding:16px;
+
+margin-top:25px;
+
+border:none;
+
+border-radius:14px;
+
+background:linear-gradient(90deg,#6f61ff,#5145ff);
+
+color:white;
+
+font-size:16px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+button:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 0 25px rgba(98,80,255,0.6);
+
+}
+
+p{
+
+margin-top:20px;
+
+text-align:center;
+
+color:#b7b7d4;
+
+}
+
+a{
+
+color:#7c6cff;
+
+text-decoration:none;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>Register</h1>
+
+<input type="text" id="username" placeholder="Username">
+
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="register()">
+Criar Conta
+</button>
+
+<p>
+Já possui conta?
+<a href="login.html">
+Login
+</a>
+</p>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
